@@ -1,0 +1,38 @@
+{
+  "name": "segment-tree",
+  "version": "0.0.0",
+  "description": "Segment tree data structure",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "tape": "~1.0.4"
+  },
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mikolalysenko/segment-tree.git"
+  },
+  "keywords": [
+    "rle",
+    "run",
+    "length",
+    "encoding",
+    "segment",
+    "tree",
+    "compress",
+    "array"
+  ],
+  "author": "Mikola Lysenko",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "fe91470e9678d73de2d46a5393bb34b6fbe123fa",
+  "bugs": {
+    "url": "https://github.com/mikolalysenko/segment-tree/issues"
+  }
+}
