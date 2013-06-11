@@ -49,7 +49,13 @@ Sets the value at `index` to `v`
 
 **Returns** `v`
 
-### `SegmentTree.proto.slice([begin, end])`
+### `SegmentTree.proto.slice(begin[, end])`
+Returns a slice of the segment tree.  Same semantics as [Array.slice](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
+
+* `begin` is the start of the interval
+* `end` is the end of the interval
+
+**Returns** A 1-level deep slice of the segment tree
 
 ### `SegmentTree.proto.toArray([array])`
 Unpacks the segment tree into an array
