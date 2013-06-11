@@ -45,8 +45,11 @@ require("tape")("segment-tree", function(t) {
   t.same(tree3.values, [0,1])
   
   var x = [1,1,1,0,1,2,2,3,1,0,0,0]
-  var y = SegmentTree.encode(x)
-  t.same(y.decode(), x)
+  var y = SegmentTree.fromArray(x)
+  t.same(y.toArray(), x)
+  
+  var q = y.slice(3, -4)
+  t.same(q.toArray(), [0,1,2,2,3])
   
   t.end()
 })

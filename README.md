@@ -49,7 +49,9 @@ Sets the value at `index` to `v`
 
 **Returns** `v`
 
-### `SegmentTree.proto.decode([array])`
+### `SegmentTree.proto.slice([begin, end])`
+
+### `SegmentTree.proto.toArray([array])`
 Unpacks the segment tree into an array
 
 * `array` gets the output.  If not specified a new array is allocated
@@ -63,7 +65,7 @@ Create an empty segment tree
 
 **Returns** A new segment tree
 
-### `SegmentTree.encode(array)`
+### `SegmentTree.fromArray(array)`
 Encodes an array into a segment tree
 
 * `array` is the array to encode

@@ -76,7 +76,7 @@ SegmentTree.prototype.set = function(y, v) {
   return v
 }
 
-SegmentTree.prototype.decode = function(array) {
+SegmentTree.prototype.toArray = function(array) {
   var size = this.length
   if(!array) {
     array = new Array(size)
@@ -105,6 +105,33 @@ SegmentTree.prototype.decode = function(array) {
   return array
 }
 
+SegmentTree.prototype.slice = function(start, end) {
+  if(start === undefined) {
+    start = 0
+  } else if(start < 0) {
+    start = this.length+start
+  }
+  if(end === undefined) {
+    end = this.length
+  } else if(end < 0) {
+    end = this.length+end
+  }  
+  var pointers = this.pointers
+  var values = this.values
+  var a = lowerBound(pointers, start)
+  var b = lowerBound(pointers, end)
+  if(pointers[b] < end) {
+    ++b
+  }
+  var opointers = pointers.slice(a,b)
+  var ovalues = values.slice(a,b)
+  var i, n=opointers.length
+  opointers[0] = 0
+  for(i=1; i<n; ++i) {
+    opointers[i] -= start
+  }
+  return new SegmentTree(end - start, opointers, ovalues)
+}
 module.exports = SegmentTree
 
 function makeEmptyTree(size) {
@@ -112,7 +139,7 @@ function makeEmptyTree(size) {
 }
 module.exports.zeros = makeEmptyTree
 
-function encode(array) {
+function fromArray(array) {
   if(array.length === 0) {
     return new SegmentTree(0, [], [])
   }
@@ -127,4 +154,4 @@ function encode(array) {
   }
   return new SegmentTree(size, pointers, values)
 }
-module.exports.encode = encode
+module.exports.fromArray = fromArray
