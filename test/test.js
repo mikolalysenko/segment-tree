@@ -1,8 +1,9 @@
 var SegmentTree = require("../index.js")
 
 require("tape")("segment-tree", function(t) {
-
   var tree = SegmentTree.zeros(10)
+  
+  t.same(tree.get(5), 0)
   
   tree.set(1, 1)
   t.same(tree.pointers, [0,1,2])
@@ -32,6 +33,20 @@ require("tape")("segment-tree", function(t) {
   tree2.set(0, 1)
   t.same(tree2.pointers, [0,1])
   t.same(tree2.values, [1,0])
+  
+  var tree3 = SegmentTree.zeros(10)
+  tree3.set(8, 1)
+  tree3.set(9, 1)
+  t.same(tree3.pointers, [0,8])
+  t.same(tree3.values, [0,1])
+  
+  tree3.set(7,1)
+  t.same(tree3.pointers, [0,7])
+  t.same(tree3.values, [0,1])
+  
+  var x = [1,1,1,0,1,2,2,3,1,0,0,0]
+  var y = SegmentTree.encode(x)
+  t.same(y.decode(), x)
   
   t.end()
 })

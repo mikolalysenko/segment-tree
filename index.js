@@ -6,22 +6,22 @@ function lowerBound(array, idx) {
   var lo = 0
   var mid
   var v
-  while(hi > lo) {
+  while(lo <= hi) {
     mid = (hi + lo)>>>1
     v = array[mid]
-    if(v < idx) {
-      lo = mid + 1
-    } else if(v > idx) {
-      hi = mid - 1
-    } else {
+    if(v === idx) {
       return mid
+    } else if(v < idx) {
+      lo = mid + 1
+    } else {
+      hi = mid - 1
     }
   }
-  return lo
+  return hi
 }
 
-function SegmentTree(size, pointers, values) {
-  this.size = size
+function SegmentTree(length, pointers, values) {
+  this.length = length
   this.pointers = pointers
   this.values = values
 }
@@ -37,7 +37,7 @@ SegmentTree.prototype.set = function(y, v) {
   var iv = values[ptr]
   if(iv !== v) {
     var n = pointers.length
-    var size = this.size
+    var size = this.length
     var start = pointers[ptr]
     var end = ptr+1 < n ? pointers[ptr+1] : size
     if(y === start) {
@@ -75,9 +75,56 @@ SegmentTree.prototype.set = function(y, v) {
   }
   return v
 }
+
+SegmentTree.prototype.decode = function(array) {
+  var size = this.length
+  if(!array) {
+    array = new Array(size)
+  } else if(array.length !== size) {
+    throw new Error("Length mismatch")
+  }
+  if(size === 0) {
+    return
+  }
+  var values = this.values
+  var pointers = this.pointers
+  var n = this.values.length
+  var i, j, start, end, v
+  for(i=0; i+1<n; ++i) {
+    start = pointers[i]
+    end = pointers[i+1]
+    v = values[i]
+    for(j=start; j<end; ++j) {
+      array[j] = v
+    }
+  }
+  v = values[n-1]
+  for(j=pointers[n-1]; j<size; ++j) {
+    array[j] = v
+  }
+  return array
+}
+
 module.exports = SegmentTree
 
 function makeEmptyTree(size) {
   return new SegmentTree(size, [0], [0])
 }
 module.exports.zeros = makeEmptyTree
+
+function encode(array) {
+  if(array.length === 0) {
+    return new SegmentTree(0, [], [])
+  }
+  var values = [array[0]]
+  var pointers = [0]
+  var size = array.length
+  for(var i=1; i<size; ++i) {
+    if(array[i] !== array[i-1]) {
+      values.push(array[i])
+      pointers.push(i)
+    }
+  }
+  return new SegmentTree(size, pointers, values)
+}
+module.exports.encode = encode
