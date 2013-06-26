@@ -22,8 +22,8 @@ function lowerBound(array, idx) {
 
 function SegmentTree(length, pointers, values) {
   this.length = length
-  this.pointers = pointers
-  this.values = values
+  this.pointers = pointers || [0]
+  this.values = values || [0]
 }
 
 SegmentTree.prototype.get = function(y) {
@@ -155,3 +155,23 @@ function fromArray(array) {
   return new SegmentTree(size, pointers, values)
 }
 module.exports.fromArray = fromArray
+
+function fromGenericArray(array) {
+  var size = array.length
+  if(!size) {
+    return new SegmentTree(0, [], [])
+  }
+  var values = [array.get(0)]
+  var pointers = [0]
+  var p = values[0]
+  for(var i=1; i<size; ++i) {
+    var v = array.get(i)
+    if(v !== p) {
+      values.push(v)
+      pointers.push(i)
+      p = v
+    }
+  }
+  return new SegmentTree(size, pointers, values)
+}
+module.exports.fromGenericArray = fromGenericArray

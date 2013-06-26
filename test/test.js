@@ -1,4 +1,4 @@
-var SegmentTree = require("../index.js")
+var SegmentTree = require("../segtree.js")
 
 require("tape")("segment-tree", function(t) {
   var tree = SegmentTree.zeros(10)
@@ -50,6 +50,11 @@ require("tape")("segment-tree", function(t) {
   
   var q = y.slice(3, -4)
   t.same(q.toArray(), [0,1,2,2,3])
+
+  var x = [1,1,1,0,1,2,2,3,1,0,0,0]
+  var y = SegmentTree.fromGenericArray(new Int32Array(x))
+  t.same(y.toArray(), x)
+  
   
   t.end()
 })

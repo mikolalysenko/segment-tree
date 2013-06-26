@@ -78,5 +78,12 @@ Encodes an array into a segment tree
 
 **Returns** A new segment tree encoding `array`
 
+### `SegmentTree.fromGenericArray(array)`
+Encodes an array into a segment tree, except instead of using [] to access the array it uses .get()
+
+* `array` is the array to encode
+
+**Returns** A new segment tree encoding `array`
+
 ## Credits
 (c) 2013 Mikola Lysenko. MIT License
