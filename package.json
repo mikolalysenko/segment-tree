@@ -1,6 +1,6 @@
 {
   "name": "segment-tree",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Segment tree data structure",
   "main": "segtree.js",
   "directories": {

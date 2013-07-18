@@ -26,6 +26,8 @@ function SegmentTree(length, pointers, values) {
   this.values = values || [0]
 }
 
+SegmentTree.prototype.rle = "rle"
+
 SegmentTree.prototype.get = function(y) {
   return this.values[lowerBound(this.pointers, y)]
 }
